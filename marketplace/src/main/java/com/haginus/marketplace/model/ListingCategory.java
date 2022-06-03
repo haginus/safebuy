@@ -2,9 +2,7 @@ package com.haginus.marketplace.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Builder
 @Getter
@@ -14,6 +12,7 @@ import javax.persistence.Id;
 @Entity
 public class ListingCategory {
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private Long id;
 

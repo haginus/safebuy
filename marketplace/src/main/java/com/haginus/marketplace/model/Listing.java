@@ -14,6 +14,7 @@ import java.util.List;
 @Entity
 public class Listing {
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private Long id;
 
