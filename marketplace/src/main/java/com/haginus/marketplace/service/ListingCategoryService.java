@@ -4,18 +4,16 @@ import com.haginus.marketplace.exception.ResourceAlreadyExistsException;
 import com.haginus.marketplace.exception.ResourceNotFoundException;
 import com.haginus.marketplace.model.ListingCategory;
 import com.haginus.marketplace.repository.ListingCategoryRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ListingCategoryService {
   private final ListingCategoryRepository listingCategoryRepository;
-
-  public ListingCategoryService(ListingCategoryRepository listingCategoryRepository) {
-    this.listingCategoryRepository = listingCategoryRepository;
-  }
 
   public List<ListingCategory> getAll() {
     return this.listingCategoryRepository.findAll();
@@ -30,7 +28,7 @@ public class ListingCategoryService {
     if(category.getId() != null) {
       Optional<ListingCategory> optional = this.listingCategoryRepository.findById(category.getId());
       if(optional.isPresent()) {
-        throw new ResourceAlreadyExistsException("Listing category already exsits.");
+        throw new ResourceAlreadyExistsException("Listing category already exists.");
       }
     }
     return this.listingCategoryRepository.save(category);

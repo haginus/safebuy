@@ -1,9 +1,9 @@
-package com.haginus.marketplace.model;
+package com.haginus.marketplace.model.Asset;
 
+import com.haginus.marketplace.model.Listing;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 
 @Builder
 @Getter
@@ -11,22 +11,12 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Inheritance
 public class Asset {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private Long id;
-
-  @Column(name = "name", nullable = false)
-  private String name;
-
-  @NotEmpty
-  @Column(name = "mime_type", nullable = false)
-  private String mimeType;
-
-  @Lob
-  @Column(name = "content", nullable = false)
-  private byte[] content;
 
   @ManyToOne
   @JoinColumn(name = "listing_id")

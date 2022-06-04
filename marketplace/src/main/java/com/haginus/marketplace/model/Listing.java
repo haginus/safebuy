@@ -1,5 +1,6 @@
 package com.haginus.marketplace.model;
 
+import com.haginus.marketplace.model.Asset.Asset;
 import lombok.*;
 
 import javax.persistence.*;
