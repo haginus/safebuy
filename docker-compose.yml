@@ -1,22 +1,17 @@
 services:
-  postgres:
-    container_name: postgres
-    image: postgres
-    environment:
-      POSTGRES_USER: safebuy
-      POSTGRES_PASSWORD: safebuy
-      PGDATA: /data/postgres
-    volumes:
-      - postgres:/data/postgres
-    ports:
-      - "5432:5432"
-    networks:
-      - postgres
-    restart: unless-stopped
-
-networks:
-  postgres:
-    driver: bridge
+    mysql:
+      container_name: mysql
+      image: mysql
+      ports:
+        - "3306:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: safebuy
+        MYSQL_USER: safebuy
+        MYSQL_PASSWORD: safebuy
+        MYSQL_DATABASE: safebuy
+      volumes:
+        - mysql_data:/var/lib/mysql
+      restart: unless-stopped
 
 volumes:
-  postgres:
+  mysql_data:

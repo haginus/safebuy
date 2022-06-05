@@ -4,14 +4,15 @@ spring:
   application:
     name: marketplace
   datasource:
-    url: jdbc:postgresql://localhost:5432/marketplace
-    username: safebuy
-    password: safebuy
+    url: jdbc:mysql://localhost:3306/marketplace
+    username: root
+    password: 12345678
+    driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.MySQL5Dialect
         format_sql: true
     show-sql: true
