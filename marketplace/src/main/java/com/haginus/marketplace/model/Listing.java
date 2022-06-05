@@ -51,4 +51,7 @@ public class Listing {
     return listingOffer != null && !listingOffer.getStatus().isPending();
   }
 
+  public boolean needsPersonalization() {
+    return needsPersonalization;
+  }
 }
