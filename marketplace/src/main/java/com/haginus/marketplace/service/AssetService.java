@@ -42,5 +42,13 @@ public class AssetService {
     return asset;
   }
 
+  public void delete(Long id) {
+    Asset asset = this.get(id);
+    this.assetRepository.delete(asset);
+  }
 
+
+  public void delete(Asset asset) {
+    this.assetRepository.delete(asset);
+  }
 }

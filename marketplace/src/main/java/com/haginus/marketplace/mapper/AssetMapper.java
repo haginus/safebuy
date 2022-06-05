@@ -50,7 +50,8 @@ public class AssetMapper {
       FileAsset entity = new FileAsset();
       entity.setName(dto.getName());
       entity.setMimeType(dto.getMimeType());
-      entity.setContent(Base64.getDecoder().decode(dto.getContent()));
+      String[] content = dto.getContent().split(",");
+      entity.setContent(Base64.getDecoder().decode(content[content.length - 1]));
       return entity;
     }
     return null;

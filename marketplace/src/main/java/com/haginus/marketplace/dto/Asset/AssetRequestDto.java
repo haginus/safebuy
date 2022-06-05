@@ -10,7 +10,6 @@ import java.util.Objects;
 public class AssetRequestDto {
   private String id;
 
-  @NotEmpty
   private String type;
 
   private String link;
@@ -21,6 +20,7 @@ public class AssetRequestDto {
 
   @AssertTrue(message = "Please select a correct type and match attributes for it.")
   boolean isValid() {
+    if(id != null) return true;
     if(Objects.equals(type, "link")) {
       return link != null && link.length() > 0;
     } else if(Objects.equals(type, "file")) {
