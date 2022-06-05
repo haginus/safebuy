@@ -1,4 +1,4 @@
-package com.haginus.marketplace.exception;
+package com.haginus.common.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
   public ResourceNotFoundException(String message) {

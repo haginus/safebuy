@@ -1,7 +1,7 @@
 package com.haginus.marketplace.service;
 
-import com.haginus.marketplace.exception.ResourceAlreadyExistsException;
-import com.haginus.marketplace.exception.ResourceNotFoundException;
+import com.haginus.common.exception.ResourceAlreadyExistsException;
+import com.haginus.common.exception.ResourceNotFoundException;
 import com.haginus.marketplace.model.ListingCategory;
 import com.haginus.marketplace.repository.ListingCategoryRepository;
 import lombok.AllArgsConstructor;

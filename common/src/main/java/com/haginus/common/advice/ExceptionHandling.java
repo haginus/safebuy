@@ -1,6 +1,6 @@
-package com.haginus.marketplace.advice;
+package com.haginus.common.advice;
 
-import com.haginus.marketplace.exception.*;
+import com.haginus.common.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

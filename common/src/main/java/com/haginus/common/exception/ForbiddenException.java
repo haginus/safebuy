@@ -1,4 +1,4 @@
-package com.haginus.marketplace.exception;
+package com.haginus.common.exception;
 
 public class ForbiddenException extends RuntimeException {
   public ForbiddenException(String message) {

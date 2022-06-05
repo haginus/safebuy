@@ -12,6 +12,7 @@
     <module>auth</module>
     <module>marketplace</module>
     <module>common</module>
+    <module>payment</module>
   </modules>
 
   <name>safebuy</name>

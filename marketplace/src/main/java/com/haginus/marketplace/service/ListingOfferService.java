@@ -1,9 +1,9 @@
 package com.haginus.marketplace.service;
 
-import com.haginus.marketplace.exception.ForbiddenException;
-import com.haginus.marketplace.exception.NotAllowedException;
-import com.haginus.marketplace.exception.ResourceAlreadyExistsException;
-import com.haginus.marketplace.exception.ResourceNotFoundException;
+import com.haginus.common.exception.ForbiddenException;
+import com.haginus.common.exception.NotAllowedException;
+import com.haginus.common.exception.ResourceAlreadyExistsException;
+import com.haginus.common.exception.ResourceNotFoundException;
 import com.haginus.marketplace.model.Listing;
 import com.haginus.marketplace.model.ListingOffer;
 import com.haginus.marketplace.model.ListingOfferStatus;
