@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class PaymentMethod {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private Long id;
 
@@ -26,7 +26,7 @@ public class PaymentMethod {
   private String expiration;
 
   @Column(name = "cvv", nullable = false)
-  private Integer cvv;
+  private String cvv;
 
   @ManyToOne
   @JoinColumn(name = "account_id")

@@ -8,6 +8,8 @@ import com.haginus.payment.repository.AccountRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 @AllArgsConstructor
 public class AccountService {
@@ -26,6 +28,8 @@ public class AccountService {
     Account account = Account.builder()
       .userId(userId)
       .balance(0.0)
+      .paymentMethods(new ArrayList<>())
+      .transactions(new ArrayList<>())
       .build();
     return this.accountRepository.save(account);
   }

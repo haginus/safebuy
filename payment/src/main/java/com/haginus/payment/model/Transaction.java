@@ -26,8 +26,11 @@ public class Transaction {
   @JoinColumn(name = "payment_method_id")
   private PaymentMethod paymentMethod;
 
-  @Column(name = "for_listing_id")
-  private Long forListingId;
+  @Enumerated(EnumType.STRING)
+  private TransactionType type;
+
+  @Column(name = "details", length = 1024)
+  private String details;
 
   @ManyToOne
   @JoinColumn(name = "account_id")

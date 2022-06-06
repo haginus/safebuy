@@ -16,12 +16,12 @@ public class PaymentMethodService {
 
   private final PaymentMethodRepository paymentMethodRepository;
 
-  PaymentMethod get(Long id) {
+  public PaymentMethod get(Long id) {
     Optional<PaymentMethod> optional = this.paymentMethodRepository.findById(id);
     return optional.orElseThrow(() -> new ResourceNotFoundException("Payment method does not exist."));
   }
 
-  PaymentMethod save(PaymentMethod paymentMethod, Account account) {
+  public PaymentMethod save(PaymentMethod paymentMethod, Account account) {
     if(paymentMethod.getId() != null) {
       Optional<PaymentMethod> optional = this.paymentMethodRepository.findById(paymentMethod.getId());
       if(optional.isPresent()) {
@@ -32,7 +32,7 @@ public class PaymentMethodService {
     return this.paymentMethodRepository.save(paymentMethod);
   }
 
-  PaymentMethod safeSave(PaymentMethod paymentMethod, Account account) {
+  public PaymentMethod safeSave(PaymentMethod paymentMethod, Account account) {
     if(paymentMethod.getId() != null) {
       return this.get(paymentMethod.getId());
     }

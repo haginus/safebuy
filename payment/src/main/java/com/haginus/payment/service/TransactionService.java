@@ -7,12 +7,14 @@ import com.haginus.payment.exception.InvalidPaymentMethod;
 import com.haginus.payment.model.Account;
 import com.haginus.payment.model.PaymentMethod;
 import com.haginus.payment.model.Transaction;
+import com.haginus.payment.model.TransactionType;
 import com.haginus.payment.repository.TransactionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -24,15 +26,16 @@ public class TransactionService {
   private final PaymentMethodService paymentMethodService;
   private final AccountService accountService;
 
+  public List<Transaction> getAllByAccountId(Long accountId) {
+    return this.transactionRepository.findAllByAccount_UserId(accountId);
+  }
+
   @Transactional
-  public Transaction withdraw(Account account, PaymentMethod paymentMethod, Double amount, Long userId) {
+  public Transaction withdraw(Account account, PaymentMethod paymentMethod, Double amount) {
     if(amount <= 0) {
       throw new NotAllowedException("You cannot withdraw a negative amount.");
     }
-    if(userId != null && !Objects.equals(account.getUserId(), userId)) {
-      throw new ForbiddenException();
-    }
-    if(!Objects.equals(paymentMethod.getAccount().getUserId(), account.getUserId())) {
+    if(paymentMethod.getId() != null && !Objects.equals(paymentMethod.getAccount().getUserId(), account.getUserId())) {
       throw new ForbiddenException("Payment method does not belong to selected account.");
     }
     if(account.getBalance() - amount < 0) {
@@ -42,6 +45,7 @@ public class TransactionService {
       .id(UUID.randomUUID().toString())
       .amount(-amount)
       .timestamp(new Timestamp(System.currentTimeMillis()))
+      .type(TransactionType.WITHDRAW)
       .paymentMethod(paymentMethod)
       .account(account)
       .build();
@@ -49,12 +53,12 @@ public class TransactionService {
     return this.transactionRepository.save(transaction);
   }
 
-  public Transaction creditAccount(Account account, PaymentMethod paymentMethod, Double amount, Long userId) {
+  public Transaction creditAccount(Account account, PaymentMethod paymentMethod, Double amount) {
     if(amount <= 0) {
       throw new NotAllowedException("You cannot credit a negative amount.");
     }
-    if(userId != null && !Objects.equals(account.getUserId(), userId)) {
-      throw new ForbiddenException();
+    if(paymentMethod.getId() != null && !Objects.equals(paymentMethod.getAccount().getUserId(), account.getUserId())) {
+      throw new ForbiddenException("Payment method does not belong to selected account.");
     }
     try {
       this.mockSwipeCall(paymentMethod, amount);
@@ -63,6 +67,7 @@ public class TransactionService {
         .id(UUID.randomUUID().toString())
         .amount(amount)
         .timestamp(new Timestamp(System.currentTimeMillis()))
+        .type(TransactionType.TOP_UP)
         .paymentMethod(paymentMethod)
         .account(account)
         .build();
