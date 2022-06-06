@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class Transaction {
   @Id
-  @Column(name = "id", nullable = false)
+  @Column(name = "id", nullable = false, length = 36)
   private String id;
 
   @Column(name = "amount", nullable = false)
