@@ -46,29 +46,15 @@ public class ExceptionHandling {
     return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
   }
 
-  @ExceptionHandler({ResourceNotFoundException.class})
-  public ResponseEntity<Object> notFound(ResourceNotFoundException exception){
+  @ExceptionHandler({RuntimeException.class})
+  public ResponseEntity<Object> commonException(RuntimeException exception){
+    if(!exception.getClass().isAnnotationPresent(CommonExceptionHandling.class)) {
+      throw exception;
+    }
     Map<String, Object> body = new HashMap<>();
     body.put("message", exception.getMessage());
     body.put("code", exception.getClass().getSimpleName());
-    return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    return new ResponseEntity<>(body, exception.getClass().getAnnotation(CommonExceptionHandling.class).value());
   }
-
-  @ExceptionHandler({ResourceAlreadyExistsException.class, NotAllowedException.class})
-  public ResponseEntity<Object> notAllowedExceptions(RuntimeException exception){
-    Map<String, Object> body = new HashMap<>();
-    body.put("message", exception.getMessage());
-    body.put("code", exception.getClass().getSimpleName());
-    return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
-  }
-
-  @ExceptionHandler({ForbiddenException.class})
-  public ResponseEntity<Object> authForbiddenExceptions(RuntimeException exception){
-    Map<String, Object> body = new HashMap<>();
-    body.put("message", exception.getMessage());
-    body.put("code", exception.getClass().getSimpleName());
-    return new ResponseEntity<>(body, HttpStatus.FORBIDDEN);
-  }
-
 
 }
