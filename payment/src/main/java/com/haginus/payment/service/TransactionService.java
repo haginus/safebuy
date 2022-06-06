@@ -11,6 +11,7 @@ import com.haginus.payment.repository.TransactionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
@@ -21,7 +22,9 @@ public class TransactionService {
 
   private final TransactionRepository transactionRepository;
   private final PaymentMethodService paymentMethodService;
+  private final AccountService accountService;
 
+  @Transactional
   public Transaction withdraw(Account account, PaymentMethod paymentMethod, Double amount, Long userId) {
     if(amount <= 0) {
       throw new NotAllowedException("You cannot withdraw a negative amount.");
@@ -42,6 +45,7 @@ public class TransactionService {
       .paymentMethod(paymentMethod)
       .account(account)
       .build();
+    this.accountService.changeBalance(account, -amount);
     return this.transactionRepository.save(transaction);
   }
 
@@ -62,6 +66,7 @@ public class TransactionService {
         .paymentMethod(paymentMethod)
         .account(account)
         .build();
+      this.accountService.changeBalance(account, amount);
       return this.transactionRepository.save(transaction);
     } catch (InsufficientFounds e) {
       this.paymentMethodService.safeSave(paymentMethod, account);

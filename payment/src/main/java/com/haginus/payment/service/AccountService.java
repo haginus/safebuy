@@ -30,16 +30,16 @@ public class AccountService {
     return this.accountRepository.save(account);
   }
 
-  public Account changeBalance(Long accountId, Long amount, boolean allowCrediting) {
+  public Account changeBalance(Long accountId, Double amount, boolean allowCrediting) {
     Account account = this.get(accountId);
     return this.changeBalance(account, amount, allowCrediting);
   }
 
-  public Account changeBalance(Long accountId, Long amount) {
+  public Account changeBalance(Long accountId, Double amount) {
     return this.changeBalance(accountId, amount, false);
   }
 
-  public Account changeBalance(Account account, Long amount, boolean allowCrediting) {
+  public Account changeBalance(Account account, Double amount, boolean allowCrediting) {
     double newBalance = account.getBalance() + amount;
     if(newBalance < 0 && !allowCrediting) {
       throw new NotAllowedException("There is not enough money.");
@@ -48,7 +48,7 @@ public class AccountService {
     return this.accountRepository.save(account);
   }
 
-  public Account changeBalance(Account account, Long amount) {
+  public Account changeBalance(Account account, Double amount) {
     return this.changeBalance(account, amount, false);
   }
 }
