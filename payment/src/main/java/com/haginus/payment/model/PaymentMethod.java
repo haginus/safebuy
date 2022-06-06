@@ -16,6 +16,9 @@ public class PaymentMethod {
   @Column(name = "id", nullable = false)
   private Long id;
 
+  @Column(name = "owner_name", nullable = false)
+  private String ownerName;
+
   @Column(name = "card_number", nullable = false, length = 16)
   private String cardNumber;
 
@@ -24,5 +27,9 @@ public class PaymentMethod {
 
   @Column(name = "cvv", nullable = false)
   private Integer cvv;
+
+  @ManyToOne
+  @JoinColumn(name = "account_id")
+  private Account account;
 
 }

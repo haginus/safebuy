@@ -23,4 +23,7 @@ public class Account {
   @OneToMany(mappedBy = "account", orphanRemoval = true)
   private List<Transaction> transactions = new ArrayList<>();
 
+  @OneToMany(mappedBy = "account", orphanRemoval = true)
+  private List<PaymentMethod> paymentMethods = new ArrayList<>();
+
 }
