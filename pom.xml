@@ -13,6 +13,7 @@
     <module>marketplace</module>
     <module>common</module>
     <module>payment</module>
+    <module>config-server</module>
   </modules>
 
   <name>safebuy</name>
@@ -59,6 +60,10 @@
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-openfeign</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
   </dependencies>
 

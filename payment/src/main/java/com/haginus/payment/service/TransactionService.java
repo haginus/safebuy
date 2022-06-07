@@ -2,6 +2,7 @@ package com.haginus.payment.service;
 
 import com.haginus.common.exception.ForbiddenException;
 import com.haginus.common.exception.NotAllowedException;
+import com.haginus.payment.config.PropertiesConfig;
 import com.haginus.payment.exception.InsufficientFounds;
 import com.haginus.payment.exception.InvalidPaymentMethod;
 import com.haginus.payment.model.Account;
@@ -25,6 +26,7 @@ public class TransactionService {
   private final TransactionRepository transactionRepository;
   private final PaymentMethodService paymentMethodService;
   private final AccountService accountService;
+  private final PropertiesConfig propertiesConfig;
 
   public List<Transaction> getAllByAccountId(Long accountId) {
     return this.transactionRepository.findAllByAccount_UserId(accountId);
@@ -34,6 +36,9 @@ public class TransactionService {
   public Transaction withdraw(Account account, PaymentMethod paymentMethod, Double amount) {
     if(amount <= 0) {
       throw new NotAllowedException("You cannot withdraw a negative amount.");
+    }
+    if(amount < propertiesConfig.getMinTransactionAmount()) {
+      throw new NotAllowedException(String.format("Minimum amount is %f.", propertiesConfig.getMinTransactionAmount()));
     }
     if(paymentMethod.getId() != null && !Objects.equals(paymentMethod.getAccount().getUserId(), account.getUserId())) {
       throw new ForbiddenException("Payment method does not belong to selected account.");
@@ -56,6 +61,9 @@ public class TransactionService {
   public Transaction creditAccount(Account account, PaymentMethod paymentMethod, Double amount) {
     if(amount <= 0) {
       throw new NotAllowedException("You cannot credit a negative amount.");
+    }
+    if(amount < propertiesConfig.getMinTransactionAmount()) {
+      throw new NotAllowedException(String.format("Minimum amount is %f.", propertiesConfig.getMinTransactionAmount()));
     }
     if(paymentMethod.getId() != null && !Objects.equals(paymentMethod.getAccount().getUserId(), account.getUserId())) {
       throw new ForbiddenException("Payment method does not belong to selected account.");

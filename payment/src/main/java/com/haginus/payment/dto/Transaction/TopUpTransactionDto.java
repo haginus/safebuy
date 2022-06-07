@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class TopUpTransactionDto {
   @NotNull
-  @Min(20)
   private Double amount;
 
   @NotNull
