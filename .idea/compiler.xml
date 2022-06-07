@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
         <module name="payment" />
+        <module name="namingserver" />
         <module name="marketplace" />
         <module name="common" />
         <module name="auth" />

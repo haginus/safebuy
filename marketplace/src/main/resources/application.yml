@@ -16,3 +16,26 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
         format_sql: true
     show-sql: true
+  config:
+    import: optional:configserver:http://localhost:8070
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+info:
+  app:
+    name: marketplace
+    description: list and buy digital assets
+    version: 1
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8071/eureka

@@ -1,8 +1,6 @@
 server:
   port: 8083
 spring:
-  profiles:
-    active: prod
   application:
     name: payment
   datasource:
@@ -26,3 +24,18 @@ management:
     web:
       exposure:
         include: "*"
+
+info:
+  app:
+    name: payment
+    description: managing payments
+    version: 1
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8071/eureka
