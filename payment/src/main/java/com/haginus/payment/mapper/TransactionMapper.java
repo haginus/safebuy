@@ -1,8 +1,6 @@
 package com.haginus.payment.mapper;
 
-import com.haginus.payment.dto.PaymentMethodResponseDto;
-import com.haginus.payment.dto.Transaction.TransactionResponseDto;
-import com.haginus.payment.model.PaymentMethod;
+import com.haginus.common.clients.payment.dto.Transaction.TransactionResponseDto;
 import com.haginus.payment.model.Transaction;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

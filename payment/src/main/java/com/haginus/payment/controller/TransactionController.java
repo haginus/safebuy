@@ -1,8 +1,8 @@
 package com.haginus.payment.controller;
 
-import com.haginus.payment.dto.Transaction.MarketplaceTransactionDto;
-import com.haginus.payment.dto.Transaction.TopUpTransactionDto;
-import com.haginus.payment.dto.Transaction.TransactionResponseDto;
+import com.haginus.common.clients.payment.dto.Transaction.MarketplaceTransactionDto;
+import com.haginus.common.clients.payment.dto.Transaction.TopUpTransactionDto;
+import com.haginus.common.clients.payment.dto.Transaction.TransactionResponseDto;
 import com.haginus.payment.mapper.PaymentMethodMapper;
 import com.haginus.payment.mapper.TransactionMapper;
 import com.haginus.payment.model.Account;

@@ -1,5 +1,6 @@
 package com.haginus.payment.model;
 
+import com.haginus.common.clients.payment.dto.Transaction.TransactionType;
 import lombok.*;
 
 import javax.persistence.*;

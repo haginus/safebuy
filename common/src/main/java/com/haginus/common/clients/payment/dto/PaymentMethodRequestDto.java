@@ -1,13 +1,17 @@
-package com.haginus.payment.dto;
+package com.haginus.common.clients.payment.dto;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;
 
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class PaymentMethodRequestDto {
   private Long id;
 

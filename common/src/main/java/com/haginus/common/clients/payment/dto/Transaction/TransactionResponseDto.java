@@ -1,12 +1,15 @@
-package com.haginus.payment.dto.Transaction;
+package com.haginus.common.clients.payment.dto.Transaction;
 
-import com.haginus.payment.dto.PaymentMethodResponseDto;
-import com.haginus.payment.model.TransactionType;
-import lombok.Data;
+import com.haginus.common.clients.payment.dto.PaymentMethodResponseDto;
+import lombok.*;
 
 import java.sql.Timestamp;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class TransactionResponseDto {
   private String id;
   private Double amount;

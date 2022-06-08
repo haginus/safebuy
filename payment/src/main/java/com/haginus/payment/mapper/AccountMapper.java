@@ -1,6 +1,6 @@
 package com.haginus.payment.mapper;
 
-import com.haginus.payment.dto.AccountDto;
+import com.haginus.common.clients.payment.dto.AccountDto;
 import com.haginus.payment.model.Account;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

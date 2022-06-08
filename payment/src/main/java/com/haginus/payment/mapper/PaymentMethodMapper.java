@@ -1,7 +1,7 @@
 package com.haginus.payment.mapper;
 
-import com.haginus.payment.dto.PaymentMethodRequestDto;
-import com.haginus.payment.dto.PaymentMethodResponseDto;
+import com.haginus.common.clients.payment.dto.PaymentMethodRequestDto;
+import com.haginus.common.clients.payment.dto.PaymentMethodResponseDto;
 import com.haginus.payment.model.PaymentMethod;
 import com.haginus.payment.service.PaymentMethodService;
 import org.modelmapper.ModelMapper;

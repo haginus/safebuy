@@ -1,7 +1,6 @@
 package com.haginus.payment.controller;
 
-import com.haginus.payment.dto.AccountDto;
-import com.haginus.payment.exception.InvalidPaymentMethod;
+import com.haginus.common.clients.payment.dto.AccountDto;
 import com.haginus.payment.mapper.AccountMapper;
 import com.haginus.payment.model.Account;
 import com.haginus.payment.service.AccountService;

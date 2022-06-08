@@ -1,5 +1,8 @@
 package com.haginus.marketplace.service;
 
+import com.haginus.common.clients.payment.PaymentClient;
+import com.haginus.common.clients.payment.dto.Transaction.MarketplaceTransactionDto;
+import com.haginus.common.clients.payment.dto.Transaction.TransactionResponseDto;
 import com.haginus.common.exception.ForbiddenException;
 import com.haginus.common.exception.NotAllowedException;
 import com.haginus.common.exception.ResourceAlreadyExistsException;
@@ -21,6 +24,7 @@ public class ListingOfferService {
 
   private final ListingOfferRepository listingOfferRepository;
   private final ListingService listingService;
+  private final PaymentClient paymentClient;
 
   public ListingOffer get(Long id) {
     Optional<ListingOffer> listingOffer = this.listingOfferRepository.findById(id);
@@ -76,7 +80,17 @@ public class ListingOfferService {
     }
     listingOffer.setStatus(ListingOfferStatus.ACCEPTED_BY_BUYER);
     this.setTimestamps(listingOffer, 0);
-    // TODO: Add money to seller account
+
+    Listing listing = listingOffer.getListing();
+
+    TransactionResponseDto paymentResult = this.paymentClient.marketplaceListingSold(
+      MarketplaceTransactionDto.builder()
+        .accountId(listing.getId())
+        .listingId(listingId)
+        .amount(listing.getPrice())
+        .build()
+    );
+
     return this.listingOfferRepository.save(listingOffer);
   }
 

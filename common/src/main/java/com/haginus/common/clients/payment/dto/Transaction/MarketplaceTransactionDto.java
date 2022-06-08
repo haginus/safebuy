@@ -1,10 +1,14 @@
-package com.haginus.payment.dto.Transaction;
+package com.haginus.common.clients.payment.dto.Transaction;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class MarketplaceTransactionDto {
   @NotNull
   private Long accountId;

@@ -8,7 +8,7 @@ import com.haginus.payment.exception.InvalidPaymentMethod;
 import com.haginus.payment.model.Account;
 import com.haginus.payment.model.PaymentMethod;
 import com.haginus.payment.model.Transaction;
-import com.haginus.payment.model.TransactionType;
+import com.haginus.common.clients.payment.dto.Transaction.TransactionType;
 import com.haginus.payment.repository.TransactionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

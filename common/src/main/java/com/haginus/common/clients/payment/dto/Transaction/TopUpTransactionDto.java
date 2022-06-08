@@ -1,13 +1,16 @@
-package com.haginus.payment.dto.Transaction;
+package com.haginus.common.clients.payment.dto.Transaction;
 
-import com.haginus.payment.dto.PaymentMethodRequestDto;
-import lombok.Data;
+import com.haginus.common.clients.payment.dto.PaymentMethodRequestDto;
+import lombok.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class TopUpTransactionDto {
   @NotNull
   private Double amount;
