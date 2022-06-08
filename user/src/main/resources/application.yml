@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: user
+  profiles:
+    active: default
   datasource:
     url: jdbc:mysql://localhost:3306/user
     username: root

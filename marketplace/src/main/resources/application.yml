@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: marketplace
+  profiles:
+    active: default
   datasource:
     url: jdbc:mysql://localhost:3306/marketplace
     username: root

@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: payment
+  profiles:
+    active: default
   datasource:
     url: jdbc:mysql://localhost:3306/payment
     username: root

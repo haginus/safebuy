@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: namingserver
+  profiles:
+    active: default
   config:
     import: optional:configserver:http://localhost:8070
 
