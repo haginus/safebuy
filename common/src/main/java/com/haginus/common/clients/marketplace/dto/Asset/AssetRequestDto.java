@@ -1,12 +1,15 @@
-package com.haginus.marketplace.dto.Asset;
+package com.haginus.common.clients.marketplace.dto.Asset;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class AssetRequestDto {
   private String id;
 

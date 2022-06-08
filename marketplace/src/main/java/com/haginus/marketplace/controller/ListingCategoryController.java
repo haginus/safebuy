@@ -1,7 +1,7 @@
 package com.haginus.marketplace.controller;
 
-import com.haginus.marketplace.dto.ListingCategory.ListingCategoryRequestDto;
-import com.haginus.marketplace.dto.ListingCategory.ListingCategoryResponseDto;
+import com.haginus.common.clients.marketplace.dto.ListingCategory.ListingCategoryRequestDto;
+import com.haginus.common.clients.marketplace.dto.ListingCategory.ListingCategoryResponseDto;
 import com.haginus.marketplace.mapper.ListingCategoryMapper;
 import com.haginus.marketplace.model.ListingCategory;
 import com.haginus.marketplace.service.ListingCategoryService;

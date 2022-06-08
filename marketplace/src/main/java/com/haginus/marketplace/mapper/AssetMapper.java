@@ -1,9 +1,9 @@
 package com.haginus.marketplace.mapper;
 
-import com.haginus.marketplace.dto.Asset.AssetRequestDto;
-import com.haginus.marketplace.dto.Asset.AssetResponseDto;
-import com.haginus.marketplace.dto.Asset.FileAssetResponseDto;
-import com.haginus.marketplace.dto.Asset.LinkAssetResponseDto;
+import com.haginus.common.clients.marketplace.dto.Asset.AssetRequestDto;
+import com.haginus.common.clients.marketplace.dto.Asset.AssetResponseDto;
+import com.haginus.common.clients.marketplace.dto.Asset.FileAssetResponseDto;
+import com.haginus.common.clients.marketplace.dto.Asset.LinkAssetResponseDto;
 import com.haginus.marketplace.model.Asset.Asset;
 import com.haginus.marketplace.model.Asset.FileAsset;
 import com.haginus.marketplace.model.Asset.LinkAsset;

@@ -1,11 +1,15 @@
-package com.haginus.marketplace.dto.ListingCategory;
+package com.haginus.common.clients.marketplace.dto.ListingCategory;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ListingCategoryRequestDto {
 
   @NotEmpty

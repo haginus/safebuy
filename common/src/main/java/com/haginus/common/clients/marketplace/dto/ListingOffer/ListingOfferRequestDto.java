@@ -1,12 +1,16 @@
-package com.haginus.marketplace.dto.ListingOffer;
+package com.haginus.common.clients.marketplace.dto.ListingOffer;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ListingOfferRequestDto {
   @NotNull
   @Positive

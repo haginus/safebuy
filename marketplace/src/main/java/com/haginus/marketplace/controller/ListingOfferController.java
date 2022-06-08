@@ -1,7 +1,7 @@
 package com.haginus.marketplace.controller;
 
-import com.haginus.marketplace.dto.ListingOffer.ListingOfferRequestDto;
-import com.haginus.marketplace.dto.ListingOffer.ListingOfferResponseDto;
+import com.haginus.common.clients.marketplace.dto.ListingOffer.ListingOfferRequestDto;
+import com.haginus.common.clients.marketplace.dto.ListingOffer.ListingOfferResponseDto;
 import com.haginus.marketplace.mapper.ListingOfferMapper;
 import com.haginus.marketplace.model.ListingOffer;
 import com.haginus.marketplace.service.ListingOfferService;

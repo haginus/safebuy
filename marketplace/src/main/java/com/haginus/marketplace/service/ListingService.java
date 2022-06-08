@@ -1,13 +1,12 @@
 package com.haginus.marketplace.service;
 
-import com.haginus.common.exception.ForbiddenException;
 import com.haginus.common.exception.NotAllowedException;
 import com.haginus.common.exception.ResourceAlreadyExistsException;
 import com.haginus.common.exception.ResourceNotFoundException;
 import com.haginus.marketplace.model.Asset.Asset;
 import com.haginus.marketplace.model.Listing;
 import com.haginus.marketplace.model.ListingOffer;
-import com.haginus.marketplace.model.ListingOfferStatus;
+import com.haginus.common.clients.marketplace.dto.ListingOffer.ListingOfferStatus;
 import com.haginus.marketplace.repository.ListingRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

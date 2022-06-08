@@ -1,11 +1,14 @@
-package com.haginus.marketplace.dto.ListingOffer;
+package com.haginus.common.clients.marketplace.dto.ListingOffer;
 
-import com.haginus.marketplace.model.ListingOfferStatus;
-import lombok.Data;
+import lombok.*;
 
 import java.sql.Timestamp;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ListingOfferResponseDto {
   private Long buyerId;
   private String paymentId;

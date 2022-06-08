@@ -9,7 +9,7 @@ import com.haginus.common.exception.ResourceAlreadyExistsException;
 import com.haginus.common.exception.ResourceNotFoundException;
 import com.haginus.marketplace.model.Listing;
 import com.haginus.marketplace.model.ListingOffer;
-import com.haginus.marketplace.model.ListingOfferStatus;
+import com.haginus.common.clients.marketplace.dto.ListingOffer.ListingOfferStatus;
 import com.haginus.marketplace.repository.ListingOfferRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.haginus.marketplace.model;
+package com.haginus.common.clients.marketplace.dto.ListingOffer;
 
 public enum ListingOfferStatus {
   PENDING_SELLER_ACTION(),

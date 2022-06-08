@@ -1,5 +1,6 @@
 package com.haginus.marketplace.model;
 
+import com.haginus.common.clients.marketplace.dto.ListingOffer.ListingOfferStatus;
 import lombok.*;
 
 import javax.persistence.*;

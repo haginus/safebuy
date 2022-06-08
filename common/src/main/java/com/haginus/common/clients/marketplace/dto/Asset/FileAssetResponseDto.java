@@ -1,10 +1,12 @@
-package com.haginus.marketplace.dto.Asset;
+package com.haginus.common.clients.marketplace.dto.Asset;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class FileAssetResponseDto extends AssetResponseDto {
   private final String type = "file";
 

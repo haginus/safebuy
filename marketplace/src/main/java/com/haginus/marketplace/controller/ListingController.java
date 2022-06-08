@@ -1,8 +1,8 @@
 package com.haginus.marketplace.controller;
 
-import com.haginus.marketplace.dto.Asset.AssetRequestDto;
-import com.haginus.marketplace.dto.Listing.ListingRequestDto;
-import com.haginus.marketplace.dto.Listing.ListingResponseDto;
+import com.haginus.common.clients.marketplace.dto.Asset.AssetRequestDto;
+import com.haginus.common.clients.marketplace.dto.Listing.ListingRequestDto;
+import com.haginus.common.clients.marketplace.dto.Listing.ListingResponseDto;
 import com.haginus.marketplace.mapper.AssetMapper;
 import com.haginus.marketplace.mapper.ListingMapper;
 import com.haginus.marketplace.model.Asset.Asset;

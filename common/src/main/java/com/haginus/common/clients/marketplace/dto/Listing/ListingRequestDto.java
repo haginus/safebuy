@@ -1,7 +1,7 @@
-package com.haginus.marketplace.dto.Listing;
+package com.haginus.common.clients.marketplace.dto.Listing;
 
-import com.haginus.marketplace.dto.Asset.AssetRequestDto;
-import lombok.Data;
+import com.haginus.common.clients.marketplace.dto.Asset.AssetRequestDto;
+import lombok.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -9,7 +9,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ListingRequestDto {
   @NotEmpty
   private String title;

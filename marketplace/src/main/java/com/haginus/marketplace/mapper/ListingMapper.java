@@ -1,8 +1,8 @@
 package com.haginus.marketplace.mapper;
 
-import com.haginus.marketplace.dto.Listing.ListingDetailsResponseDto;
-import com.haginus.marketplace.dto.Listing.ListingRequestDto;
-import com.haginus.marketplace.dto.Listing.ListingResponseDto;
+import com.haginus.common.clients.marketplace.dto.Listing.ListingDetailsResponseDto;
+import com.haginus.common.clients.marketplace.dto.Listing.ListingRequestDto;
+import com.haginus.common.clients.marketplace.dto.Listing.ListingResponseDto;
 import com.haginus.marketplace.model.Listing;
 import com.haginus.marketplace.service.ListingCategoryService;
 import org.modelmapper.ModelMapper;
