@@ -87,6 +87,35 @@ public class TransactionService {
     }
   }
 
+  public Transaction buyMarketplaceListing(Long accountId, Long listingId, Double amount) {
+    // TODO: check marketplace
+    return this.processMarketplaceTransaction(accountId, listingId, -amount, TransactionType.LISTING_BUY);
+  }
+
+  public Transaction marketplaceListingSold(Long accountId, Long listingId, Double amount) {
+    return this.processMarketplaceTransaction(accountId, listingId, amount, TransactionType.LISTING_SELL);
+  }
+
+  public Transaction marketplaceListingRefunded(Long accountId, Long listingId, Double amount) {
+    return this.processMarketplaceTransaction(accountId, listingId, amount, TransactionType.LISTING_REFUND);
+  }
+
+  private Transaction processMarketplaceTransaction(Long accountId, Long listingId, Double amount, TransactionType type) {
+    Account account = this.accountService.get(accountId);
+    Transaction transaction = Transaction.builder()
+      .id(UUID.randomUUID().toString())
+      .amount(amount)
+      .timestamp(new Timestamp(System.currentTimeMillis()))
+      .type(type)
+      .paymentMethod(null)
+      .details(String.format("{ listingId: \"%d\"}", listingId))
+      .account(account)
+      .build();
+    boolean allowCrediting = type != TransactionType.LISTING_BUY;
+    this.accountService.changeBalance(account, amount, allowCrediting);
+    return this.transactionRepository.save(transaction);
+  }
+
   private void mockSwipeCall(PaymentMethod paymentMethod, Double amount) {
     if(paymentMethod.getCardNumber().startsWith("10")) {
       throw new InvalidPaymentMethod();

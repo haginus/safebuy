@@ -18,6 +18,7 @@ public class PaymentMethodMapper {
   }
 
   public PaymentMethodResponseDto toDto(PaymentMethod entity) {
+    if(entity == null) return null;
     PaymentMethodResponseDto dto = this.modelMapper.map(entity, PaymentMethodResponseDto.class);
     dto.setCardNumber("************" + entity.getCardNumber().substring(12));
     return dto;

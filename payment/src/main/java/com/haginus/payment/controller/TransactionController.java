@@ -1,5 +1,6 @@
 package com.haginus.payment.controller;
 
+import com.haginus.payment.dto.Transaction.MarketplaceTransactionDto;
 import com.haginus.payment.dto.Transaction.TopUpTransactionDto;
 import com.haginus.payment.dto.Transaction.TransactionResponseDto;
 import com.haginus.payment.mapper.PaymentMethodMapper;
@@ -51,6 +52,20 @@ public class TransactionController {
     Account account = this.accountService.get(id);
     PaymentMethod paymentMethod = this.paymentMethodMapper.toEntity(dto.getPaymentMethod());
     Transaction transaction = this.transactionService.withdraw(account, paymentMethod, dto.getAmount());
+    return ResponseEntity.ok().body(this.transactionMapper.toDto(transaction));
+  }
+
+  @PostMapping("/marketplace/buy")
+  public ResponseEntity<TransactionResponseDto> marketplaceListingBuy(@Valid @RequestBody MarketplaceTransactionDto dto) {
+    Transaction transaction = this.transactionService.buyMarketplaceListing(dto.getAccountId(), dto.getListingId(),
+      dto.getAmount());
+    return ResponseEntity.ok().body(this.transactionMapper.toDto(transaction));
+  }
+
+  @PostMapping("/marketplace/sold")
+  public ResponseEntity<TransactionResponseDto> marketplaceListingSold(@Valid @RequestBody MarketplaceTransactionDto dto) {
+    Transaction transaction = this.transactionService.marketplaceListingSold(dto.getAccountId(), dto.getListingId(),
+      dto.getAmount());
     return ResponseEntity.ok().body(this.transactionMapper.toDto(transaction));
   }
 }
