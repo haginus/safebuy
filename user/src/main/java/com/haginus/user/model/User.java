@@ -1,6 +1,8 @@
 package com.haginus.user.model;
 
+import com.haginus.common.clients.user.dto.UserResponseDto;
 import lombok.*;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -34,5 +36,9 @@ public class User {
 
   @OneToOne(mappedBy = "user", orphanRemoval = true)
   private KYCProcess kycProcess;
+
+  public UserResponseDto toDto() {
+    return new ModelMapper().map(this, UserResponseDto.class);
+  }
 
 }

@@ -6,7 +6,7 @@ spring:
   profiles:
     active: default
   datasource:
-    url: jdbc:mysql://localhost:3306/payment
+    url: jdbc:mysql://localhost:3306/payment?createDatabaseIfNotExist=true
     username: root
     password: 12345678
     driver-class-name: com.mysql.jdbc.Driver

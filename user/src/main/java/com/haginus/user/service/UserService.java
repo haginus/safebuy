@@ -1,7 +1,10 @@
 package com.haginus.user.service;
 
+import com.haginus.common.clients.payment.PaymentClient;
+import com.haginus.common.clients.user.dto.AuthResponse;
 import com.haginus.common.exception.ResourceAlreadyExistsException;
 import com.haginus.common.exception.ResourceNotFoundException;
+import com.haginus.common.exception.ServiceCommunicationException;
 import com.haginus.user.exception.AuthException;
 import com.haginus.user.model.User;
 import com.haginus.user.repository.UserRepository;
@@ -17,6 +20,7 @@ public class UserService {
 
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
+  private final PaymentClient paymentClient;
 
   public User get(Long id) {
     Optional<User> optional = this.userRepository.findById(id);
@@ -33,17 +37,28 @@ public class UserService {
       throw new ResourceAlreadyExistsException("User already exists.");
     }
     if(this.userRepository.findByEmail(user.getEmail()).isPresent()) {
-      throw new ResourceAlreadyExistsException("User already exists.");
+      throw new AuthException("Email is already in use.");
     }
     user.setPassword(this.passwordEncoder.encode(user.getPassword()));
-    return this.userRepository.save(user);
+    User result = this.userRepository.save(user);
+    try {
+      this.paymentClient.createAccount(result.getId());
+      return result;
+    } catch (Exception e) {
+      this.userRepository.delete(result);
+      throw new ServiceCommunicationException("There was a problem with creating the account.");
+    }
   }
 
-  public User checkCredentials(String email, String password) {
+  public AuthResponse signIn(String email, String password) {
     User user = this.getByEmail(email);
     if(!this.passwordEncoder.matches(password, user.getPassword())) {
       throw new AuthException("Wrong password.");
     }
-    return user;
+    return this.signIn(user);
+  }
+
+  public AuthResponse signIn(User user) {
+    return new AuthResponse("token", user.toDto());
   }
 }
