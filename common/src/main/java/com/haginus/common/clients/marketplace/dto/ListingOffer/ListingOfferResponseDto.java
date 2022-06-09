@@ -1,5 +1,6 @@
 package com.haginus.common.clients.marketplace.dto.ListingOffer;
 
+import com.haginus.common.clients.user.dto.UserResponseDto;
 import lombok.*;
 
 import java.sql.Timestamp;
@@ -15,4 +16,5 @@ public class ListingOfferResponseDto {
   private ListingOfferStatus status;
   private Timestamp lastActionTimestamp;
   private Timestamp expiryTimestamp;
+  private UserResponseDto buyer;
 }
