@@ -5,13 +5,18 @@ services:
       ports:
         - "3306:3306"
       environment:
-        MYSQL_ROOT_PASSWORD: safebuy
-        MYSQL_USER: safebuy
-        MYSQL_PASSWORD: safebuy
-        MYSQL_DATABASE: safebuy
+        MYSQL_ROOT_PASSWORD: 12345678
       volumes:
         - mysql_data:/var/lib/mysql
       restart: unless-stopped
+
+    marketplace:
+      container_name: marketplace
+      image: haginus/marketplace
+      ports:
+        - "8082:8082"
+      environment:
+        SPRING_PROFILES_ACTIVE: kube
 
 volumes:
   mysql_data:

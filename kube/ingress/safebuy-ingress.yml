@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: safebuy-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /marketplace
+            pathType: Prefix
+            backend:
+              service:
+                name: marketplace
+                port:
+                  number: 80
+#          - path: /payment
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: payment
+#                port:
+#                  number: 80
