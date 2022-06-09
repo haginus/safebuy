@@ -61,13 +61,13 @@ public class ListingMapper {
     return dto;
   }
 
-  public ListingResponseDto toDtoFallback(Listing entity, boolean showDetails, Throwable throwable) {
+  private ListingResponseDto toDtoFallback(Listing entity, boolean showDetails, Throwable throwable) {
     ListingResponseDto dto = this.toDtoMaker(entity, showDetails);
     dto.setOwner(null);
     return dto;
   }
 
-  public ListingResponseDto toDtoFallback(Listing entity, Throwable throwable) {
+  private ListingResponseDto toDtoFallback(Listing entity, Throwable throwable) {
     return this.toDtoFallback(entity, false, throwable);
   }
 
