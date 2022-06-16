@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,10 +28,21 @@ public class ListingController {
   private final AssetMapper assetMapper;
 
   @GetMapping
-  public ResponseEntity<List<ListingResponseDto>> getAll() {
+  public ResponseEntity<List<ListingResponseDto>> getAll(@RequestParam Optional<String> search,
+                                                         @RequestParam Optional<Long> categoryId,
+                                                         @RequestParam Optional<Boolean> isAvailable) {
     return ResponseEntity.ok().body(
-      this.listingService.getAll().stream()
+      this.listingService.getAll(search, categoryId, isAvailable).stream()
         .map(this.listingMapper::toDto)
+        .collect(Collectors.toList())
+    );
+  }
+
+  @GetMapping("/for/{userId}")
+  public ResponseEntity<List<ListingResponseDto>> getAllForUser(@PathVariable Long userId) {
+    return ResponseEntity.ok().body(
+      this.listingService.getAllForUser(userId).stream()
+        .map((listing) -> this.listingMapper.toDto(listing, true))
         .collect(Collectors.toList())
     );
   }

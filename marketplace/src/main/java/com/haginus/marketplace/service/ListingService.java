@@ -5,13 +5,21 @@ import com.haginus.common.exception.ResourceAlreadyExistsException;
 import com.haginus.common.exception.ResourceNotFoundException;
 import com.haginus.marketplace.model.Asset.Asset;
 import com.haginus.marketplace.model.Listing;
+import com.haginus.marketplace.model.ListingCategory;
 import com.haginus.marketplace.model.ListingOffer;
 import com.haginus.common.clients.marketplace.dto.ListingOffer.ListingOfferStatus;
 import com.haginus.marketplace.repository.ListingRepository;
+import com.haginus.marketplace.repository.ListingSpecifications;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.exact;
 
 @Service
 @AllArgsConstructor
@@ -21,6 +29,30 @@ public class ListingService {
 
   public List<Listing> getAll() {
     return this.listingRepository.findAll();
+  }
+
+  public List<Listing> getAll(Optional<String> search, Optional<Long> categoryId, Optional<Boolean> isAvailable) {
+
+    Specification<Listing> specification = Specification
+      .where(search.isEmpty() ? null : ListingSpecifications.titleOrDescriptionContains(search.get()))
+      .and(categoryId.isEmpty() ? null : ListingSpecifications.inCategory(categoryId.get()))
+      .and(isAvailable.isEmpty() ? null : ListingSpecifications.isAvailable(isAvailable.get()));
+
+    return this.listingRepository.findAll(specification);
+
+//    if(search.isPresent() && categoryId.isPresent()) {
+//      return this.listingRepository.findAllBySearchAndCategory(search.get(), categoryId.get());
+//    } else if(search.isPresent()) {
+//      return this.listingRepository.findAllByTitleOrDescription(search.get());
+//    } else if(categoryId.isPresent()) {
+//      return this.listingRepository.findAllByListingCategory_Id(categoryId.get());
+//    } else {
+//      return this.getAll();
+//    }
+  }
+
+  public List<Listing> getAllForUser(Long userId) {
+    return this.listingRepository.findAllByOwnerOrBuyerId(userId);
   }
 
   public Listing get(Long id) {

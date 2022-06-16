@@ -78,9 +78,11 @@ public class ListingMapper {
       ((ListingDetailsResponseDto) dto).setAssets(
         entity.getAssets().stream().map(assetMapper::toDto).collect(Collectors.toList())
       );
-      ((ListingDetailsResponseDto) dto).setListingOffer(
-        this.listingOfferMapper.toDto(entity.getListingOffer())
-      );
+      if(entity.getListingOffer() != null) {
+        ((ListingDetailsResponseDto) dto).setListingOffer(
+          this.listingOfferMapper.toDto(entity.getListingOffer())
+        );
+      }
     } else {
       dto = modelMapper.map(entity, ListingResponseDto.class);
     }
