@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ListingRepository extends JpaRepository<Listing, Long>, JpaSpecificationExecutor<Listing> {
-  @Query("select l from Listing l where l.ownerId = :userId or l.listingOffer.buyerId = :usedId")
+  @Query("select l from Listing l left join l.listingOffer lo where l.ownerId = :usedId or lo.buyerId = :usedId")
   public List<Listing> findAllByOwnerOrBuyerId(@Param("usedId") Long usedId);
 
   @Query("select l from Listing l where lower(l.title) like lower(concat('%', :search,'%')) or lower(l.description) like lower(concat('%', :search,'%'))")
