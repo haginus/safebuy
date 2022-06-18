@@ -79,7 +79,7 @@ public class ListingController {
   }
 
   @PostMapping("/{id}/assets")
-  public ResponseEntity<ListingResponseDto> update(@RequestBody List<@Valid AssetRequestDto> dtoList, @PathVariable Long id) {
+  public ResponseEntity<ListingResponseDto> addAssets(@RequestBody List<@Valid AssetRequestDto> dtoList, @PathVariable Long id) {
     List<Asset> assets = dtoList.stream().map(this.assetMapper::toEntity).collect(Collectors.toList());
     Listing result = this.listingService.addAssets(id, assets);
     return ResponseEntity.ok().body(this.listingMapper.toDto(result, true));

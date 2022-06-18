@@ -1,7 +1,12 @@
 package com.haginus.payment.service;
 
+import com.haginus.common.clients.marketplace.MarketplaceClient;
+import com.haginus.common.clients.marketplace.dto.Listing.ListingResponseDto;
+import com.haginus.common.clients.marketplace.dto.ListingOffer.ListingOfferRequestDto;
+import com.haginus.common.clients.marketplace.dto.ListingOffer.ListingOfferResponseDto;
 import com.haginus.common.exception.ForbiddenException;
 import com.haginus.common.exception.NotAllowedException;
+import com.haginus.common.exception.ServiceCommunicationException;
 import com.haginus.payment.config.PropertiesConfig;
 import com.haginus.payment.exception.InsufficientFounds;
 import com.haginus.payment.exception.InvalidPaymentMethod;
@@ -27,6 +32,7 @@ public class TransactionService {
   private final PaymentMethodService paymentMethodService;
   private final AccountService accountService;
   private final PropertiesConfig propertiesConfig;
+  private final MarketplaceClient marketplaceClient;
 
   public List<Transaction> getAllByAccountId(Long accountId) {
     return this.transactionRepository.findAllByAccount_UserId(accountId);
@@ -88,8 +94,26 @@ public class TransactionService {
   }
 
   public Transaction buyMarketplaceListing(Long accountId, Long listingId, Double amount) {
-    // TODO: check marketplace
-    return this.processMarketplaceTransaction(accountId, listingId, -amount, TransactionType.LISTING_BUY);
+    Transaction transaction = this.processMarketplaceTransaction(accountId, listingId, -amount, TransactionType.LISTING_BUY);
+    try {
+      ListingResponseDto listing = marketplaceClient.getOffer(listingId);
+      if(Objects.equals(listing.getPrice(), amount)) {
+        ListingOfferRequestDto dto = ListingOfferRequestDto.builder()
+          .buyerId(accountId)
+          .paymentId(transaction.getId())
+          .build();
+        marketplaceClient.createOffer(dto, listingId);
+        return transaction;
+      } else {
+        transaction.setType(TransactionType.TOP_UP);
+        this.transactionRepository.save(transaction);
+        return transaction;
+      }
+    } catch (Exception e) {
+      transaction.setType(TransactionType.TOP_UP);
+      this.transactionRepository.save(transaction);
+      throw new ServiceCommunicationException("Couldn't buy listing. Money went back to your account.");
+    }
   }
 
   public Transaction marketplaceListingSold(Long accountId, Long listingId, Double amount) {

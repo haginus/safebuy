@@ -4,6 +4,7 @@ import com.haginus.common.exception.ForbiddenException;
 import com.haginus.common.exception.ResourceAlreadyExistsException;
 import com.haginus.common.exception.ResourceNotFoundException;
 import com.haginus.marketplace.model.Asset.Asset;
+import com.haginus.marketplace.model.Asset.FileAsset;
 import com.haginus.marketplace.model.Listing;
 import com.haginus.marketplace.repository.AssetRepository;
 import lombok.AllArgsConstructor;
@@ -39,6 +40,14 @@ public class AssetService {
       throw new ForbiddenException("You cannot access this resource.");
     }
     return asset;
+  }
+
+  public FileAsset getFileAsset(Long id) {
+    Asset asset = this.get(id);
+    if(!(asset instanceof FileAsset)) {
+      throw new ResourceNotFoundException("Asset does not exist.");
+    }
+    return (FileAsset) asset;
   }
 
   public void delete(Long id) {

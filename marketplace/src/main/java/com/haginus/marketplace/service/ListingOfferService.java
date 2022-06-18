@@ -3,10 +3,7 @@ package com.haginus.marketplace.service;
 import com.haginus.common.clients.payment.PaymentClient;
 import com.haginus.common.clients.payment.dto.Transaction.MarketplaceTransactionDto;
 import com.haginus.common.clients.payment.dto.Transaction.TransactionResponseDto;
-import com.haginus.common.exception.ForbiddenException;
-import com.haginus.common.exception.NotAllowedException;
-import com.haginus.common.exception.ResourceAlreadyExistsException;
-import com.haginus.common.exception.ResourceNotFoundException;
+import com.haginus.common.exception.*;
 import com.haginus.marketplace.model.Listing;
 import com.haginus.marketplace.model.ListingOffer;
 import com.haginus.common.clients.marketplace.dto.ListingOffer.ListingOfferStatus;
@@ -43,7 +40,6 @@ public class ListingOfferService {
         throw new ResourceAlreadyExistsException("Listing offer already exists.");
       }
     }
-    // TODO: Check paymentId in Payment Service
     Listing listing = listingOffer.getListing();
     if(!listing.isAvailable()) {
       throw new NotAllowedException("This listing is not available.");
@@ -83,13 +79,18 @@ public class ListingOfferService {
 
     Listing listing = listingOffer.getListing();
 
-    TransactionResponseDto paymentResult = this.paymentClient.marketplaceListingSold(
-      MarketplaceTransactionDto.builder()
-        .accountId(listing.getId())
-        .listingId(listingId)
-        .amount(listing.getPrice())
-        .build()
-    );
+    try {
+      TransactionResponseDto paymentResult = this.paymentClient.marketplaceListingSold(
+        MarketplaceTransactionDto.builder()
+          .accountId(listing.getOwnerId())
+          .listingId(listingId)
+          .amount(listing.getPrice())
+          .build()
+      );
+    } catch (Exception e) {
+      System.out.println(e);
+      throw new ServiceCommunicationException("There was a problem in communicating with the Payment service.");
+    }
 
     return this.listingOfferRepository.save(listingOffer);
   }

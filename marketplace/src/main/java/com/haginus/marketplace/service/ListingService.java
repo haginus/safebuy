@@ -110,7 +110,7 @@ public class ListingService {
     if(listingOffer == null) {
       throw new NotAllowedException("Use update() instead.");
     }
-    if(listingOffer.getStatus() != ListingOfferStatus.PENDING_BUYER_CONFIRMATION) {
+    if(listingOffer.getStatus() != ListingOfferStatus.PENDING_SELLER_ACTION) {
       throw new NotAllowedException("Assets cannot be added anymore.");
     }
     assets.forEach(asset -> {
