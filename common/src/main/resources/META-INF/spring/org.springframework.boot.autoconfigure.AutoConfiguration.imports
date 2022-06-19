@@ -1,2 +1,3 @@
 com.haginus.common.autoconfigure.CommonAutoConfiguration
 com.haginus.common.autoconfigure.ClientsAutoConfiguration
+com.haginus.common.autoconfigure.WebSecurityConfig

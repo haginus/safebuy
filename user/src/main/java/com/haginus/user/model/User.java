@@ -1,11 +1,15 @@
 package com.haginus.user.model;
 
 import com.haginus.common.clients.user.dto.UserResponseDto;
+import com.haginus.common.security.MyUserDetails;
 import lombok.*;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,6 +43,10 @@ public class User {
 
   public UserResponseDto toDto() {
     return new ModelMapper().map(this, UserResponseDto.class);
+  }
+
+  public MyUserDetails toUserDetails() {
+    return new ModelMapper().map(this, MyUserDetails.class);
   }
 
 }

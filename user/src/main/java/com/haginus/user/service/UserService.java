@@ -5,6 +5,8 @@ import com.haginus.common.clients.user.dto.AuthResponse;
 import com.haginus.common.exception.ResourceAlreadyExistsException;
 import com.haginus.common.exception.ResourceNotFoundException;
 import com.haginus.common.exception.ServiceCommunicationException;
+import com.haginus.common.security.jwtutils.TokenIssuer;
+import com.haginus.common.security.jwtutils.TokenManager;
 import com.haginus.user.exception.AuthException;
 import com.haginus.user.model.User;
 import com.haginus.user.repository.UserRepository;
@@ -21,6 +23,7 @@ public class UserService {
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
   private final PaymentClient paymentClient;
+  private final TokenManager tokenManager;
 
   public User get(Long id) {
     Optional<User> optional = this.userRepository.findById(id);
@@ -59,6 +62,7 @@ public class UserService {
   }
 
   public AuthResponse signIn(User user) {
-    return new AuthResponse("token", user.toDto());
+    String token = tokenManager.generateJwtToken(user.toUserDetails(), TokenIssuer.USER_SERVICE_CLIENT);
+    return new AuthResponse(token, user.toDto());
   }
 }
