@@ -3,6 +3,8 @@ package com.haginus.payment.controller;
 import com.haginus.common.clients.payment.dto.Transaction.MarketplaceTransactionDto;
 import com.haginus.common.clients.payment.dto.Transaction.TopUpTransactionDto;
 import com.haginus.common.clients.payment.dto.Transaction.TransactionResponseDto;
+import com.haginus.common.security.AllowOnlyIssuer;
+import com.haginus.common.security.jwtutils.TokenIssuer;
 import com.haginus.payment.mapper.PaymentMethodMapper;
 import com.haginus.payment.mapper.TransactionMapper;
 import com.haginus.payment.model.Account;
@@ -62,6 +64,7 @@ public class TransactionController {
     return ResponseEntity.ok().body(this.transactionMapper.toDto(transaction));
   }
 
+  @AllowOnlyIssuer(TokenIssuer.MARKETPLACE_SERVICE)
   @PostMapping("/marketplace/sold")
   public ResponseEntity<TransactionResponseDto> marketplaceListingSold(@Valid @RequestBody MarketplaceTransactionDto dto) {
     Transaction transaction = this.transactionService.marketplaceListingSold(dto.getAccountId(), dto.getListingId(),

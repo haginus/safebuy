@@ -45,3 +45,4 @@ eureka:
 common:
   security:
     secret: secret
+    ignore-issuer: true

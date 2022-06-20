@@ -1,6 +1,8 @@
 package com.haginus.payment.controller;
 
 import com.haginus.common.clients.payment.dto.AccountDto;
+import com.haginus.common.security.AllowOnlyIssuer;
+import com.haginus.common.security.jwtutils.TokenIssuer;
 import com.haginus.payment.mapper.AccountMapper;
 import com.haginus.payment.model.Account;
 import com.haginus.payment.service.AccountService;
@@ -22,6 +24,7 @@ public class AccountController {
     return ResponseEntity.ok().body(this.accountMapper.toDto(account));
   }
 
+  @AllowOnlyIssuer(TokenIssuer.USER_SERVICE)
   @PostMapping("/{id}")
   ResponseEntity<AccountDto> create(@PathVariable Long id) {
     Account account = this.accountService.create(id);

@@ -54,3 +54,7 @@ resilience4j:
     configs:
       default:
         register-health-indicator: true
+
+common:
+  security:
+    secret: secret

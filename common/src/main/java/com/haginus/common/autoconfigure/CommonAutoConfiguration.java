@@ -8,12 +8,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Import;
 
 @AutoConfiguration
-@Import({SecurityAspect.class, ExceptionHandling.class})
-@EnableConfigurationProperties(SecurityProperties.class)
+@Import({ExceptionHandling.class})
 public class CommonAutoConfiguration {
-  private final SecurityProperties securityProperties;
-  CommonAutoConfiguration(SecurityProperties securityProperties) {
-    this.securityProperties = securityProperties;
-    System.out.println(securityProperties.getSecret());
-  }
 }

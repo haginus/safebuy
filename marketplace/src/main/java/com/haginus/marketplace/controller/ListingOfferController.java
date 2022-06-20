@@ -2,6 +2,8 @@ package com.haginus.marketplace.controller;
 
 import com.haginus.common.clients.marketplace.dto.ListingOffer.ListingOfferRequestDto;
 import com.haginus.common.clients.marketplace.dto.ListingOffer.ListingOfferResponseDto;
+import com.haginus.common.security.AllowOnlyIssuer;
+import com.haginus.common.security.jwtutils.TokenIssuer;
 import com.haginus.marketplace.mapper.ListingOfferMapper;
 import com.haginus.marketplace.model.ListingOffer;
 import com.haginus.marketplace.service.ListingOfferService;
@@ -22,6 +24,7 @@ public class ListingOfferController {
   private final ListingService listingService;
   private final ListingOfferMapper listingOfferMapper;
 
+  @AllowOnlyIssuer(TokenIssuer.PAYMENT_SERVICE)
   @PostMapping
   public ResponseEntity<ListingOfferResponseDto> create(@Valid @RequestBody ListingOfferRequestDto dto,
                                                         @PathVariable Long listingId) {
