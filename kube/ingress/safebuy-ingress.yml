@@ -6,24 +6,24 @@ spec:
   rules:
     - http:
         paths:
-          - path: /marketplace
-            pathType: Prefix
+          - path: /marketplace/*
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: marketplace
                 port:
-                  number: 80
-          - path: /payment
-            pathType: Prefix
+                  number: 8082
+          - path: /payment/*
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: payment
                 port:
-                  number: 80
-          - path: /user
-            pathType: Prefix
+                  number: 8083
+          - path: /user/*
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: user
                 port:
-                  number: 80
+                  number: 8084
