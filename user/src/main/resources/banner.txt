@@ -1,0 +1,8 @@
+,--. ,--.
+|  | |  |  ,---.   ,---.  ,--.--.
+|  | |  | (  .-'  | .-. : |  .--'
+'  '-'  ' .-'  `) \   --. |  |
+ `-----'  `----'   `----' `--'
+
+Microservice of SafeBuy
+Powered by Spring Boot ${spring-boot.version}
