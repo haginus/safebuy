@@ -1,35 +1,13 @@
-server:
-  port: 8082
 spring:
-  application:
-    name: marketplace
   datasource:
     url: jdbc:mysql://mysql:3306/marketplace?createDatabaseIfNotExist=true
     username: root
     password: 12345678
     driver-class-name: com.mysql.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
-        format_sql: true
-    show-sql: true
   config:
-    import: optional:configserver:http://localhost:8070
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
-info:
-  app:
-    name: marketplace
-    description: list and buy digital assets
-    version: 1
+    import: optional:configserver:http://config-server:8070
+  zipkin:
+    baseUrl: http://zipkin:9411
 
 eureka:
   instance:
