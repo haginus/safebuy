@@ -16,6 +16,10 @@ spec:
         - name: payment
           image: haginus/payment:latest
           imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8084
           ports:
             - containerPort: 8083
           env:

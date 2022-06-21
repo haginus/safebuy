@@ -18,13 +18,13 @@ services:
     ports:
       - "9411:9411"
 
-  config-server:
-    container_name: config-server
-    image: haginus/config-server
-    ports:
-      - "8082:8082"
-    environment:
-      SPRING_PROFILES_ACTIVE: kube
+#  config-server:
+#    container_name: config-server
+#    image: haginus/config-server
+#    ports:
+#      - "8082:8082"
+#    environment:
+#      SPRING_PROFILES_ACTIVE: kube
 
   marketplace:
     container_name: marketplace
@@ -37,21 +37,21 @@ services:
       - mysql
       - zipkin
 
-  payment:
-    container_name: payment
-    image: haginus/payment
-    ports:
-      - "8083:8083"
-    environment:
-      SPRING_PROFILES_ACTIVE: kube
-
-  user:
-    container_name: user
-    image: haginus/user
-    ports:
-      - "8084:8084"
-    environment:
-      SPRING_PROFILES_ACTIVE: kube
+#  payment:
+#    container_name: payment
+#    image: haginus/payment
+#    ports:
+#      - "8083:8083"
+#    environment:
+#      SPRING_PROFILES_ACTIVE: kube
+#
+#  user:
+#    container_name: user
+#    image: haginus/user
+#    ports:
+#      - "8084:8084"
+#    environment:
+#      SPRING_PROFILES_ACTIVE: kube
 
 volumes:
   mysql_data:

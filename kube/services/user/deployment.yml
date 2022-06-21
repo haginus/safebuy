@@ -16,6 +16,10 @@ spec:
         - name: user
           image: haginus/user:latest
           imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8084
           ports:
             - containerPort: 8084
           env:

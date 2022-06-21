@@ -16,6 +16,10 @@ spec:
         - name: marketplace
           image: haginus/marketplace
           imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8084
           ports:
             - containerPort: 8082
           env:
